@@ -25,3 +25,16 @@ $(function() {
 $('.navbar-collapse ul li a').click(function() {
     $(this).closest('.collapse').collapse('toggle');
 });
+
+//DIV function for 'dashboard.php'
+var element_pos = 0;    //Postion of the newly created elements
+var iCnt = 0;
+$(document).ready(function() {
+    $(function() { $('#dashboard-panel-container').draggable(); });
+    $(function() { $("#dashboard-panel-container").draggable().resizable(); });
+    //Create more DIV, with 'ABSOLUTE' positioning
+    $('#dashboard-panel-container').click(function() {
+        element_pos = element_pos + $('#dashboard-panel-container').width() + 20;
+        iCnt = iCnt + 1;
+    });
+});
