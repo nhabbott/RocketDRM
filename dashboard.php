@@ -100,25 +100,7 @@
 </body>
 	
 	<!-- JQuery / Javascript -->
-	<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/themes/smoothness/jquery-ui.css" rel="stylesheet" type="text/css"/>
+    <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/themes/smoothness/jquery-ui.css" rel="stylesheet" type="text/css"/>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
-
-<script>
-    var element_pos = 0;    // POSITION OF THE NEWLY CREATED ELEMENTS.
-    var iCnt = 0;
-    $(document).ready(function() {
-
-        $(function() { $('#dashboard-panel-container').draggable(); });
-        $(function() { $("#dashboard-panel-container").draggable().resizable(); });
-
-        // CREATE MORE DIV, WITH 'ABSOLUTE' POSITIONING.
-        $('#dashboard-panel-container').click(function() {
-
-            element_pos = element_pos + $('#dashboard-panel-container').width() + 20;
-
-            iCnt = iCnt + 1;
-        });
-    });
-</script>
 </html>
