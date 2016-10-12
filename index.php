@@ -64,11 +64,11 @@
                         <a class="page-scroll" href="#team">Team</a>
                     </li>
                     <?php
-                        if(isset($_SESSION['steamid'])) {
-							echo '<li><a class="page-scroll" href="dashboard.php" >DASHBOARD</a></li>';
-						}
+			    		if(isset($_SESSION['steamid'])) {
+			    			echo '<li><a class="page-scroll" href="dashboard.php" >DASHBOARD</a></li>';
+			    		}
                     ?>
-					<li>
+		    		<li>
                         <?php
                             if(!isset($_SESSION['steamid'])) {
                                 steamlogin();
