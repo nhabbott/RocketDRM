@@ -2,6 +2,7 @@
 ob_start();
 session_start();
 require ('openid.php');
+require ('config.php');
 
 function logoutbutton() {
     echo "<form action=\"steamauth/logout.php\" method=\"post\"><input value=\"Logout\" type=\"submit\" /></form>"; //logout button
@@ -36,7 +37,22 @@ try {
 
                 $_SESSION['steamid'] = $matches[1];
                  if (isset($steamauth['loginpage'])) {
-					header('Location: '.$steamauth['loginpage']);
+					
+					require ('userinfo.php');
+					
+					require ('config.php');
+	
+					$sql = "INSERT INTO users (steamid, username, realname) VALUES ('$steamprofile[steamid]', '$steamprofile[personaname]', '$steamprofile[realname]')";
+							
+					if ($mysql->query($sql) === TRUE) {
+						echo "User has been added to the database.";
+						header('Location: '.$steamauth['loginpage']);
+					} else {
+						echo "Error: " . $sql . "<br>" . $mysql->error;
+					}	
+
+					$mysql->close();
+	
                  }
         } else {
                 echo "User is not logged in.\n";
