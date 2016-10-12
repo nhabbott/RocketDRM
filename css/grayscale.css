@@ -275,6 +275,8 @@ ul.banner-social-buttons {
 .profile-image-text {
   padding-top: 15px;
   font-weight: 400;
+  text-align: center;
+  text-overflow: ellipsis;
 }
 @media (max-width: 1199px) {
   ul.banner-social-buttons {

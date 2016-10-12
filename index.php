@@ -112,15 +112,17 @@
     <!-- Team Section -->
     <section id="team" class="content-section text-center">
         <div class="team-section">
-            <div class="container">
+            <div class="container-fluid">
                 <div class="col-lg-8 col-lg-offset-2">
                     <h2>The Rocket DRM Team</h2>
                     <?php
-                        $json = file_get_contents('http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=C1DA6C202E560C79C9F80659706866A0&steamids=76561198075957195');
+                        $json = file_get_contents('http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=C1DA6C202E560C79C9F80659706866A0&steamids=76561198075957195,76561198113581050');
                         $parsed = json_decode($json);
                         foreach($parsed->response->players as $player) {
+                            echo "<div class=\"col-sm-4 col-md-3 col-sm-offset-3\">";
                             echo "<img class=\"profile-image\" src=\"" . $player->avatarfull . "\">";
                             echo "<h4 class=\"profile-image-text\">" . $player->personaname . "<h4>";
+                            echo "</div>";
                         }
                     ?>
                 </div>
