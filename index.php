@@ -63,12 +63,17 @@
                     <li>
                         <a class="page-scroll" href="#team">Team</a>
                     </li>
-                    <li>
+                    <?php
+                        if(isset($_SESSION['steamid'])) {
+							echo '<li><a class="page-scroll" href="dashboard.php" >DASHBOARD</a></li>';
+						}
+                    ?>
+					<li>
                         <?php
                             if(!isset($_SESSION['steamid'])) {
                                 steamlogin();
                             } else if(isset($_SESSION['steamid'])) {
-                                echo "<a class=\"page-scroll\" href=\"/steamauth/logout.php\" ><i class=\"fa fa-sign-out\" aria-hidden=\"true\"></i> Logout</a>";
+                                echo "<a class=\"page-scroll\" href=\"steamauth/logout.php\" ><i class=\"fa fa-sign-out\" aria-hidden=\"true\"></i> Logout</a>";
                             }
                         ?>
                     </li>
@@ -118,9 +123,16 @@
                     <?php
                         $json = file_get_contents('http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=C1DA6C202E560C79C9F80659706866A0&steamids=76561198075957195,76561198113581050');
                         $parsed = json_decode($json);
+						$col_count = 0;
                         foreach($parsed->response->players as $player) {
-                            echo "<div class=\"col-sm-4 col-md-3 col-sm-offset-3\">";
-                            echo "<img class=\"profile-image\" src=\"" . $player->avatarfull . "\">";
+							if($col_count == 0) {
+								echo "<div class=\"col-sm-4 col-md-3 col-sm-offset-3\">";
+								$col_count = $col_count + 1;
+							} else {
+								echo "<div class=\"col-sm-4 col-md-3 col-sm-offset-0\">";
+								$col_count = $col_count + 1;
+							}
+                            echo "<img class=\"profile-image\" src=\"" . $player->avatarfull . "\" draggable=\"false\">";
                             echo "<h4 class=\"profile-image-text\">" . $player->personaname . "<h4>";
                             echo "</div>";
                         }
@@ -133,7 +145,7 @@
     <!-- Footer -->
     <footer>
         <div class="container text-center">
-            <p>Copyright &copy; Your Website 2016</p>
+            <p>Copyright &copy; RocketDRM <?php echo date("Y") ?></p>
         </div>
     </footer>
 

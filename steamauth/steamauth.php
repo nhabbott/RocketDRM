@@ -42,10 +42,9 @@ try {
 					
 					require ('config.php');
 	
-					$sql = "INSERT INTO users (steamid, username, realname) VALUES ('$steamprofile[steamid]', '$steamprofile[personaname]', '$steamprofile[realname]')";
+					$sql = "INSERT INTO users (steamid, username, realname) VALUES ('$steamprofile[steamid]', '$steamprofile[personaname]', '$steamprofile[realname]') ON DUPLICATE KEY UPDATE username='$steamprofile[personaname]', realname='$steamprofile[realname]'";
 							
 					if ($mysql->query($sql) === TRUE) {
-						echo "User has been added to the database.";
 						header('Location: '.$steamauth['loginpage']);
 					} else {
 						echo "Error: " . $sql . "<br>" . $mysql->error;
