@@ -24,7 +24,7 @@ try {
             $openid->identity = 'http://steamcommunity.com/openid';
             header('Location: ' . $openid->authUrl());
         }
-    echo "<a class=\"page-scroll\" onclick=\"document.getElementById('login').submit(); return false;\" >Dashboard</a>";
+    echo "<a class=\"page-scroll\" href=\"?login\" onclick=\"document.getElementById('login').submit(); return false;\" >Dashboard</a>";
 }
 
      elseif($openid->mode == 'cancel') {
