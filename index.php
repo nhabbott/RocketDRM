@@ -63,19 +63,14 @@
                     <li>
                         <a class="page-scroll" href="#team">Team</a>
                     </li>
+                    <li>
                     <?php
-			    		if(isset($_SESSION['steamid'])) {
-			    			echo '<li><a class="page-scroll" href="dashboard.php" >DASHBOARD</a></li>';
-			    		}
+			    		if(!isset($_SESSION['steamid'])) {
+			    			steamlogin();
+			    		} else if(isset($_SESSION['steamid'])) {
+                            echo '<a class="page-scroll" href="dashboard.php" >Dashboard</a>';
+                        }
                     ?>
-		    		<li>
-                        <?php
-                            if(!isset($_SESSION['steamid'])) {
-                                steamlogin();
-                            } else if(isset($_SESSION['steamid'])) {
-                                echo "<a class=\"page-scroll\" href=\"steamauth/logout.php\" ><i class=\"fa fa-sign-out\" aria-hidden=\"true\"></i> Logout</a>";
-                            }
-                        ?>
                     </li>
                 </ul>
             </div>
