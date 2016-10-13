@@ -3,7 +3,7 @@
   "title": "Rocket DRM",
   "version": "1",
   "homepage": "N/A",
-  "author": "Noah H. Abbott",
+  "author": "MexicanRaindeer",
   "devDependencies": {
     "bootstrap": "^3.3.7",
     "browser-sync": "^2.13.0",
@@ -18,6 +18,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "N/A"
+    "url": "https://github.com/MexicanRaindeer/RocketDRM"
   }
 }
