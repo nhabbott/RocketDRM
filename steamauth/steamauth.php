@@ -37,21 +37,24 @@ try {
 
                 $_SESSION['steamid'] = $matches[1];
                  if (isset($steamauth['loginpage'])) {
-					
-					require ('userinfo.php');
-					
-					require ('config.php');
-	
-					$sql = "INSERT INTO users (steamid, username, realname) VALUES ('$steamprofile[steamid]', '$steamprofile[personaname]', '$steamprofile[realname]') ON DUPLICATE KEY UPDATE username='$steamprofile[personaname]', realname='$steamprofile[realname]'";
-							
-					if ($mysql->query($sql) === TRUE) {
-						header('Location: '.$steamauth['loginpage']);
-					} else {
-						echo "Error: " . $sql . "<br>" . $mysql->error;
-					}	
+					try {
+    					require ('userinfo.php');
+    					
+    					require ('config.php');
+    	
+    					$sql = $conn->prepare("INSERT INTO `users` (`steamid`, `username`, `realname`) VALUES (?, ?, ?) ON DUPLICATE KEY UPDATE `username`=?, `realname`=?");
+    					
+                        $sql->bindValue(1, $steamprofile[steamid]);
+                        $sql->bindValue(2, $steamprofile[personaname]);
+                        $sql->bindValue(3, $steamprofile[realname]);
+                        $sql->bindValue(4, $steamprofile[personaname]);
+                        $sql->bindValue(5, $steamprofile[realname]);
 
-					$mysql->close();
-	
+                        $sql->execute();
+                    }
+                    catch(PDOException $e){
+                        echo $e->getMessage();
+                    }
                  }
         } else {
                 echo "User is not logged in.\n";

@@ -1,6 +1,7 @@
 <?php
   require("steamauth/steamauth.php");
   require("steamauth/userinfo.php");
+  require_once("helpers/get_subscribed.php");
   require("config.php");
   
   if(!isset($_SESSION['steamid'])) {
@@ -52,24 +53,6 @@
 			<?php echo '<img src="' . $steamprofile['avatarmedium'] . '"  id="header-user-image" draggable="false" >'; ?>
 		</div>
    </div>
-		
-		
-	<?php
-	$rows = mysqli_query($mysql,"SELECT `subscribed` FROM `users` WHERE steamid='$steamprofile[steamid]'");
-	
-	if ($rows->num_rows > 0) {
-		// output data of each row
-		while($row = $rows->fetch_assoc()) {
-			if($row["subscribed"] == 0) {
-				$output_subscription = "None";
-			} else {
-				$output_subscription = "Active";
-			}
-		}
-	}
-	
-	$mysql->close();
-	?>
 	
 	<div id="dashboard-panel-container">
 		<div id="dashboard-panel-header">
@@ -78,7 +61,7 @@
 		<div id="dashboard-panel-body">
 			<b>Steam Name:</b> <?php echo $steamprofile['personaname']; ?><br>
 			<b>SteamID64:</b> <?php echo $steamprofile['steamid']; ?><br>
-			<b>Subscription:</b> <?php echo $output_subscription; ?><br>
+			<b>Subscription:</b> <?php if ($output_subscription == "Active") {echo "<p style=\"text-color: green\">$output_subscription</p>";} else {echo "<p style=\"text-color: red\">$output_subscription</p>";} ?><br>
 		</div>
 	</div>
 

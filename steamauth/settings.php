@@ -1,7 +1,7 @@
 <?php
 //Version 3.0
 $steamauth['apikey'] = "C1DA6C202E560C79C9F80659706866A0"; // Your Steam WebAPI-Key found at http://steamcommunity.com/dev/apikey
-$steamauth['domainname'] = "localhost/RocketDRM/index.php"; // The main URL of your website displayed in the login page (CHANGED TO WORK FOR AVERY, ORIGINAL localhost:8080/index.php)
+$steamauth['domainname'] = "localhost:8080/index.php"; // The main URL of your website displayed in the login page (CHANGED TO WORK FOR AVERY, ORIGINAL localhost:8080/index.php)
 $steamauth['buttonstyle'] = "small"; // Style of the login button [small|large_no|large]
 $steamauth['logoutpage'] = "index.php"; // Page to redirect to after a successfull logout (from the directory the SteamAuth-folder is located in) - NO slash at the beginning!
 $steamauth['loginpage'] = "dashboard.php"; // Page to redirect to after a successfull login (from the directory the SteamAuth-folder is located in) - NO slash at the beginning!

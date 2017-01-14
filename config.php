@@ -1,12 +1,8 @@
 <?php
-	
-	$mysql = mysqli_connect("localhost", "root", "", "rocketdrm");
+	define("user", "root"); // DB Username
+	define("pass", "root"); // DB Password
+	define("db", "status"); // DB to use
+	define("host", "127.0.0.1:8889"); // DB Host
 
-	if (!$mysql) {
-		echo "Error: Unable to connect to MySQL." . PHP_EOL;
-		echo "Debugging errno: " . mysqli_connect_errno() . PHP_EOL;
-		echo "Debugging error: " . mysqli_connect_error() . PHP_EOL;
-		exit;
-	}
-
+	$conn = new PDO('mysql:host='.host.';dbname='.db.';charset=utf8', user, pass, array(PDO::ATTR_EMULATE_PREPARES => false, PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
 ?>
