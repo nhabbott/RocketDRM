@@ -1,12 +1,14 @@
 <?php
-  require("steamauth/steamauth.php");
-  require("steamauth/userInfo.php");
-  require("helpers/db.php");
-  
-  if(!isset($_SESSION['steamid'])) {
-	header('Location: index.php?login');
-	exit();
-  }
+    session_start();
+
+    require("steamauth/steamauth.php");
+    require("steamauth/userInfo.php");
+    require("helpers/db.php");
+
+    if(!isset($_SESSION['isadmin'])) {
+        header('Location: index.php?login');
+        exit();
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -50,8 +52,11 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="dashboard.php">Home <span class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item">
+                <!--<li class="nav-item">
                     <a class="nav-link" href="#">Link</a>
+                </li>-->
+                <li class="nav-item">
+                    <a class="nav-link" href="steamauth/logout.php">Logout</a>
                 </li>
                 <!--<li class="nav-item">
                     <a class="nav-link disabled" href="#">Disabled</a>
@@ -66,15 +71,34 @@
                 </li>-->
             </ul>
             <form class="form-inline my-2 my-md-0">
-                <input class="form-control mr-sm-2" type="text" placeholder="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                <input id="search" class="form-control mr-sm-2" type="text" placeholder="Enter Steam64ID">
+                <!--<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>-->
             </form>
         </div>
     </nav>
 
-    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
-    <script>window.jQuery</script>
+    <h2>Servers Using GRide</h1>
+    <div id="servers_table">
+        <table class="table table-inverse">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Server Name</th>
+                    <th>Server IP</th>
+                    <th>Customer</th>
+                    <th>Transaction ID</th>
+                    <th>Instances</th>
+                    <th>Last Ping</th>
+                </tr>
+            </thead>
+            <tbody id="tbody">
+            </tbody>
+        </table>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
+    <script src="js/dashboard.js"></script>
 </body>
 </html>

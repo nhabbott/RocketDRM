@@ -1,9 +1,22 @@
 body {
   /*padding-top: 20px;*/
   padding-bottom: 20px;
+  color: #ffffff;
   background-color: #333333;
 }
 
 .navbar {
   margin-bottom: 20px;
+}
+
+.table-inverse td, .table-inverse th, .table-inverse thead th {
+  border-color: #333333;
+}
+
+h2 {
+  padding-left: 15px;
+}
+
+#search {
+  border-radius: 20px;
 }

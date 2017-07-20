@@ -2,7 +2,6 @@
 ob_start();
 session_start();
 require ('openid.php');
-require ('config.php');
 
 function logoutbutton() {
     echo "<form action=\"steamauth/logout.php\" method=\"post\"><input value=\"Logout\" type=\"submit\" /></form>"; //logout button
@@ -40,7 +39,7 @@ try {
 					try {
     					require ('userInfo.php');
     					
-    					require ('db.php');
+    					require ('helpers/db.php');
     	
     					$sql = $conn->prepare("SELECT * FROM `users` WHERE `steamid`=:steamid");
     					
@@ -52,6 +51,8 @@ try {
                         if($obj->admin){
 						    $_SESSION['isadmin'] = true;
 						    $_SESSION['user'] = $steamprofile['username'];
+                            header("Location: dashboard.php");
+                            exit;
 					    } else {
 						    $_SESSION['isadmin'] = false;
 					    }
