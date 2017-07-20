@@ -38,19 +38,23 @@ try {
                 $_SESSION['steamid'] = $matches[1];
                  if (isset($steamauth['loginpage'])) {
 					try {
-    					require ('userinfo.php');
+    					require ('userInfo.php');
     					
-    					require ('config.php');
+    					require ('db.php');
     	
-    					$sql = $conn->prepare("INSERT INTO `users` (`steamid`, `username`, `realname`) VALUES (?, ?, ?) ON DUPLICATE KEY UPDATE `username`=?, `realname`=?");
+    					$sql = $conn->prepare("SELECT * FROM `users` WHERE `steamid`=:steamid");
     					
-                        $sql->bindValue(1, $steamprofile[steamid]);
-                        $sql->bindValue(2, $steamprofile[personaname]);
-                        $sql->bindValue(3, $steamprofile[realname]);
-                        $sql->bindValue(4, $steamprofile[personaname]);
-                        $sql->bindValue(5, $steamprofile[realname]);
+                        $sql->bindParam(':steamid', $steamprofile['steamid'], PDO::PARAM_STR);
 
                         $sql->execute();
+                        $obj = $sql->fetchObject();
+
+                        if($obj->admin){
+						    $_SESSION['isadmin'] = true;
+						    $_SESSION['user'] = $steamprofile['username'];
+					    } else {
+						    $_SESSION['isadmin'] = false;
+					    }
                     }
                     catch(PDOException $e){
                         echo $e->getMessage();
