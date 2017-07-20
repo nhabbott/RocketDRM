@@ -47,7 +47,7 @@ try {
 
                         $sql->execute();
                         $obj = $sql->fetchObject();
-
+                        
                         if($obj->admin){
 						    $_SESSION['isadmin'] = true;
 						    $_SESSION['user'] = $steamprofile['username'];
