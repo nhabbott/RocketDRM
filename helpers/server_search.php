@@ -12,7 +12,7 @@ if (isset($search)) {
     } elseif (preg_match("/[0-9]+/", $search)) {
         $sql = $conn->prepare("SELECT * FROM `servers` WHERE `customer`=:val");
         $bneed = true;
-    } elseif (preg_match("/[a-zA-Z]+ \d/", $search)) {
+    } elseif (preg_match("/[a-zA-Z]+ \d/", $search)) { //Needs fixing
         $sql = $conn->prepare("SELECT * FROM `servers` WHERE `tid`=:val");
         $bneed = true;
     } else {
@@ -35,9 +35,9 @@ if (isset($search)) {
         echo'<tr>';
         echo'   <th scope="row">'.$num.'</th>';
         echo'   <td>'.$link['name'].'</td>';
-        echo'   <td><a href="steam://connect/'.$link['ip'].'">'.$link['ip'].'</a></td>';
-        echo'   <td><a href="http://steamcommunity.com/profiles/'.$link['customer'].'">'.$link['customer'].'</a></td>';
-        echo'   <td><a href="https://www.paypal.com/cgi-bin/webscr?cmd=_view-a-trans&id='.$link['tid'].'">'.$link['tid'].'</a></td>';
+        echo'   <td><a href="steam://connect/'.$link['ip'].'" title="Connect to Server">'.$link['ip'].'</a></td>';
+        echo'   <td><a href="http://steamcommunity.com/profiles/'.$link['customer'].'" title="Goto Steam Profile">'.$link['customer'].'</a></td>';
+        echo'   <td><a href="https://www.paypal.com/cgi-bin/webscr?cmd=_view-a-trans&id='.$link['tid'].'" title="View PayPal Transaction">'.$link['tid'].'</a></td>';
         echo'   <td>'.$link['instances'].'</td>';
         echo'   <td>'.$link['last_ping'].'</td>';
         echo'</tr>';

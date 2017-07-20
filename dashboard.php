@@ -70,10 +70,7 @@
                     </div>
                 </li>-->
             </ul>
-            <!--<form class="form-inline my-2 my-md-0">-->
-                <input id="search" class="form-control mr-sm-2" type="text" placeholder="Steam64ID, IP, or PPTID">
-                <!--<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>-->
-            <!--</form>-->
+            <input id="search" class="form-control mr-sm-2" type="text" placeholder="Steam64ID, IP, or PPTID">
         </div>
     </nav>
 

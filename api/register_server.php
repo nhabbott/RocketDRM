@@ -6,10 +6,13 @@ date_default_timezone_set('UTC');
 
 $servern = $_POST['name'];
 $serverp = $_POST['ip'];
-$steamid = $_POST['sid'];
-$customer = "";
+$customer = $_POST['sid'];
 $tid = "";
 $ping = date("Y-m-d H:i:s");
+
+//**************************
+// Get GmodStore Data (PTID)
+//**************************
 
 $scriptid = 2361;
 $api_key = '254bbc439a6fc053455823a6d476cc16';
@@ -30,13 +33,48 @@ curl_close($ch);
 $purchases = json_decode($response, true);
 
 foreach($purchases as $purchase) {
-    if ($purchase['user_id'] == $steamid) {
-        $customer = $purchase['user_id'];
+    if ($purchase['user_id'] == $customer)
         $tid = $purchase['transaction_id'];
-        $revoked = if($purchase['purchase_revoked'] == 0) { return true; } else { return false; };
-    }
+        $revoked = ($purchase['purchase_revoked'] == 0 ? true : false);
 }
 
-$exempt = Array('192.168.1.21'); //For user who want use on multiple servers (by ip)
+//************************
+// Start looking at our DB
+//************************
+$noaccess = "6e6f2061626d246a70"; //no access; 4534114563 (XOR)
 
-$sql = $conn->prepare("INSERT INTO `servers` (`name`, `ip`, `customer`, `tid`, `instances`, `last_ping`, `revoked`) VALUES (?, ?, ?, ?, ?, ?, ?)");
+if (!$tid == null && !$revoked == null)
+    echo $noaccess; 
+    exit;
+
+/*$exempt = Array('192.168.1.21'); //For user who want use on multiple servers (by ip)
+
+$select = $conn->prepare("SELECT * FROM `servers` WHERE `customer`=:customer");
+$conn->quote($customer);
+$select->bindParam(':customer', $customer, PDO::PARAM_STR);
+$select->execute();
+
+$sobj = $select->fetchAll(PDO::FETCH_ASSOC);
+
+foreach($sobj as $row => $link) {
+    if ($link['customer'] == $customer && $revoked) {
+        echo $noaccess;
+        exit;
+    } elseif ($link['customer'] == $customer && !$revoked && $link['instances'] > 1 && !in_array($link['ip'], $exempt)) {
+        echo $noaccess;
+        exit;
+    } elseif ($link['customer'] == $customer && !$revoked && $link['instances'] == )
+}*/
+
+$insert = $conn->prepare("INSERT INTO `servers` (`name`, `ip`, `customer`, `tid`, `instances`, `last_ping`, `revoked`) VALUES (?, ?, ?, ?, ?, ?, ?)");
+$conn->quote($servern);
+$conn->quote($serverp);
+$conn->quote($customer);
+$conn->quote($tid);
+$insert->bindParam(1, $servern, PDO::PARAM_STR);
+$insert->bindParam(2, $serverp, PDO::PARAM_STR);
+$insert->bindParam(3, $customer, PDO::PARAM_STR);
+$insert->bindParam(4, $tid, PDO::PARAM_STR);
+$insert->bindParam(5, $servern, PDO::PARAM_INT); //instances
+$insert->bindParam(6, $ping, PDO::PARAM_STR);
+$insert->bindParam(7, $revoked, PDO::PARAM_BOOL);

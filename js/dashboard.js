@@ -12,11 +12,11 @@ $(document).ready(function() {
             $('#tbody').empty();
         }
     });
-});
 
-$(document).ready( function() {
-    jQuery.get("/helpers/server_query.php").done(function(data) {
-         var result = $('#tbody');
-        result.html(data);
+    $(document).ready( function() {
+        jQuery.get("/helpers/server_query.php").done(function(data) {
+            var result = $('#tbody');
+            result.html(data);
+        });
     });
 });
