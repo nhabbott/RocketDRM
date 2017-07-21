@@ -3,7 +3,13 @@ $(document).ready(function() {
         var inputVal = $(this).val();
 
         if(e.which == 13) {
-            if(inputVal.length) {
+            if(!inputVal.length) {
+                $.get("/helpers/server_query.php").done(function(data) {
+                    var result = $('#tbody');
+                    result.html(data);
+                });
+            } else if(inputVal.length) {
+                console.log("inputVal");
                 $.get("/helpers/server_search.php", {term: inputVal}).done(function(data) {
                     $('#tbody').html(data);
                 });
