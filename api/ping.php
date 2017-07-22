@@ -64,25 +64,20 @@ foreach($purchases as $purchase) {
                 $revoke->execute();
             }
 
-            echo $noaccess." revoked";
+            echo $noaccess;
             exit;
         }
     }
 }
 
 if (!$haspurchased) {
-    echo $noaccess." nopurchase";
+    echo $noaccess;
     exit;
 }
 
 //************************
 // Start looking at our DB
 //************************
-
-/*if ($tid == null && $revoked == null) {
-    echo $noaccess." other"; 
-    exit;
-}*/
 
 $select = $conn->prepare("SELECT * FROM `servers` WHERE `customer`=?");
 $conn->quote($customer);
@@ -127,15 +122,15 @@ if ($sobj == null) {
             $ban->bindParam(5, $ping, PDO::PARAM_STR);
             $ban->bindParam(6, $banned, PDO::PARAM_INT);
             $ban->execute();
-            echo $noaccess." banned";
-            //Log & ban server + email system
+            echo $noaccess;
+            mail("panel@xxlmm13xxgaming.com", "A server was automatically banned!", "");
             exit;
         } else {
             $conn->quote($customer);
             $update->bindParam(1, $ping, PDO::PARAM_STR);
             $update->bindParam(2, $customer, PDO::PARAM_STR);
             $update->execute();
-            echo $noaccess." other";
+            echo $noaccess;
             exit;
         }
     }
