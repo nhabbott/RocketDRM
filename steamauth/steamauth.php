@@ -41,20 +41,25 @@ try {
     					
     					require ('helpers/db.php');
     	
-    					$sql = $conn->prepare("SELECT * FROM `users` WHERE `steamid`=:steamid");
+    					$sql = $conn->prepare("SELECT * FROM `users` WHERE `steamid`=?");
     					
-                        $sql->bindParam(':steamid', $steamprofile['steamid'], PDO::PARAM_STR);
+                        $sql->bindParam(1, $steamprofile['steamid'], PDO::PARAM_STR);
 
                         $sql->execute();
                         $obj = $sql->fetchObject();
                         
                         if($obj->admin){
 						    $_SESSION['isadmin'] = true;
-						    $_SESSION['user'] = $steamprofile['username'];
-                            header("Location: dashboard.php");
+                            echo "Please wait";
+                            header("Refresh:1; url=dashboard.php");
+                            ob_end_flush();
                             exit;
 					    } else {
 						    $_SESSION['isadmin'] = false;
+                            header("Refresh:1; url=http://lmgtfy.com/?q=fuck+off");
+                            echo "Please wait";
+                            ob_end_flush();
+                            exit;
 					    }
                     }
                     catch(PDOException $e){

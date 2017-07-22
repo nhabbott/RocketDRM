@@ -1,13 +1,14 @@
 <?php
+    ob_start();
     session_start();
 
     require("steamauth/steamauth.php");
     require("steamauth/userInfo.php");
     require("helpers/db.php");
 
-    if(!isset($_SESSION['isadmin'])) {
+    if(!isset($_SESSION['isadmin']) || $_SESSION['isadmin'] == false) {
         header('Location: index.php?login');
-        exit();
+        exit;
     }
 ?>
 <!DOCTYPE html>
@@ -19,11 +20,15 @@
     <meta name="description" content="">
     <meta name="author" content="Addon Tools">
 
-    <title>Rocket DRM &middot Dashboard</title>
+    <title>Addon Tools</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="/favicon-32x32.ico" sizes="32x32">
+    <link rel="icon" href="/favicon-16x16.ico" sizes="16x16">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/css/tether.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/css/tether.min.css" />
 
     <!-- Custom Fonts -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
@@ -31,12 +36,12 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700" />
 
     <!-- Theme CSS -->
-    <link href="css/dashboard.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/dashboard.css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <if lt IE 9>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
     <endif>
 </head>
 
@@ -84,8 +89,8 @@
                     <th>Server IP</th>
                     <th>Customer</th>
                     <th>PayPal Transaction ID</th>
-                    <th>Instances</th>
                     <th>Last Ping</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody id="tbody">
@@ -93,9 +98,9 @@
         </table>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
-    <script src="js/dashboard.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/dashboard.js"></script>
 </body>
 </html>

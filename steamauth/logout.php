@@ -7,7 +7,7 @@
     unset($_SESSION['steam_avatarfull']);
     unset($_SESSION['steam_realname']);
     unset($_SESSION['isadmin']);
-    unset($_SESSION['tzone']);
+    unset($_SESSION['steamid']);
     session_destroy();
     header('Location: ../index.php');
 ?>

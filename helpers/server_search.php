@@ -37,6 +37,18 @@ if (isset($search)) {
             $tlink = '   <td><a href="https://www.paypal.com/cgi-bin/webscr?cmd=_view-a-trans&id='.$link['tid'].'">'.$link['tid'].'</a></td>';
         }
 
+        if ($link['revoked'] == 1) {
+            $rbtn = "<button type=\"button\" class=\"btn btn-success btn-sm\" onclick=\"CallActions('ur');\">Unrevoke</button>";
+        } else {
+            $rbtn = "<button type=\"button\" class=\"btn btn-danger btn-sm\" onclick=\"CallActions('r');\">Revoke</button>";
+        }
+
+        if ($link['banned'] == 1) {
+            $bbtn = "<button type=\"button\" class=\"btn btn-success btn-sm\" onclick=\"CallActions('ub');\">Unban</button>";
+        } else {
+            $bbtn = "<button type=\"button\" class=\"btn btn-warning btn-sm\" onclick=\"CallActions('b')\";>Ban</button>";
+        }
+
         $num = $num + 1;
         echo'<tr>';
         echo'   <th scope="row">'.$num.'</th>';
@@ -45,6 +57,7 @@ if (isset($search)) {
         echo'   <td><a href="http://steamcommunity.com/profiles/'.$link['customer'].'" title="Goto Steam Profile">'.$link['customer'].'</a></td>';
         echo    $tlink;
         echo'   <td>'.$link['last_ping'].'</td>';
+        echo'   <td>'.$rbtn.'  '.$bbtn.'</td>';
         echo'</tr>';
     }
 }
