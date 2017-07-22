@@ -49,9 +49,8 @@ if (isset($search)) {
             $bbtn = "<button type=\"button\" class=\"btn btn-warning btn-sm\" onclick=\"CallActions('b')\";>Ban</button>";
         }
 
-        $num = $num + 1;
         echo'<tr>';
-        echo'   <th scope="row">'.$num.'</th>';
+        echo'   <th scope="row">'.$link['id'].'</th>';
         echo'   <td>'.$link['name'].'</td>';
         echo'   <td><a href="steam://connect/'.$link['ip'].'" title="Connect to Server">'.$link['ip'].'</a></td>';
         echo'   <td><a href="http://steamcommunity.com/profiles/'.$link['customer'].'" title="Goto Steam Profile">'.$link['customer'].'</a></td>';

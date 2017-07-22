@@ -123,7 +123,23 @@ if ($sobj == null) {
             $ban->bindParam(6, $banned, PDO::PARAM_INT);
             $ban->execute();
             echo $noaccess;
-            mail("panel@xxlmm13xxgaming.com", "A server was automatically banned!", "");
+
+            $from = "panel@xxlmm13xxgaming.com";
+
+            $headers  = 'MIME-Version: 1.0' . "\r\n";
+            $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+            $headers .= 'From: '.$from."\r\n".
+            'Reply-To: '.$from."\r\n" .
+            'X-Mailer: PHP/' . phpversion();
+
+            $message = '<html><body>';
+            $message .= 'It looks like a server running {addon name} was automaticly banned';
+            $message .= '<p>Server IP: <a href="steam://connect/'.$serverp.'">'.$serverp.'</a></p>';
+            $message .= '<p><a href="https://www.gmodstore.com/users/view/'.$customer.'">GMS Account</a></p>';
+            $message .= '<p>Steam: <a href="http://steamcommunity.com/profiles/'.$customer.'">'.$customer.'</a></p>';
+            $message .= '</body></html>';
+
+            mail("panel@xxlmm13xxgaming.com", "A server was automatically banned!", $message, $headers);
             exit;
         } else {
             $conn->quote($customer);

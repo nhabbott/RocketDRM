@@ -25,9 +25,8 @@ foreach ($res as $row => $link) {
         $bbtn = "<button type=\"button\" class=\"btn btn-warning btn-sm\" onclick=\"CallActions('b', '".$link['customer']."')\";>Ban</button>";
     }
 
-    $num = $num + 1;
     echo'<tr>';
-    echo'   <th scope="row">'.$num.'</th>';
+    echo'   <th scope="row">'.$link['id'].'</th>';
     echo'   <td>'.$link['name'].'</td>';
     echo'   <td><a href="steam://connect/'.$link['ip'].'">'.$link['ip'].'</a></td>';
     echo'   <td id="customer"><a href="http://steamcommunity.com/profiles/'.$link['customer'].'">'.$link['customer'].'</a></td>';
