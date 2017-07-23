@@ -74,6 +74,12 @@
                         <a class="dropdown-item" href="#">Something else here</a>
                     </div>
                 </li>-->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i id="bell" class="fa fa-bell" aria-hidden="true"></i></a>
+                    <div id="dropdown-menu" class="dropdown-menu" aria-labelledby="dropdown01">
+                        <?php require_once('helpers/notify.php'); Notifications::getNotifications();?>
+                    </div>
+            </li>
             </ul>
             <input id="search" class="form-control mr-sm-2" type="text" placeholder="Steam64ID, IP, or PPTID">
         </div>

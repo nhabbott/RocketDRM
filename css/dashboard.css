@@ -23,3 +23,20 @@ h2 {
   width: auto;
   vertical-align: middle;
 }
+
+.red {
+  color: red;
+}
+
+.hidden {
+  display: none;
+}
+
+#noti {
+  cursor: pointer;
+  cursor: hand;
+}
+
+#noti:hover {
+  background-color: #eaeaea;
+}

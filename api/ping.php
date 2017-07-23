@@ -1,5 +1,6 @@
 <?php
 require('../helpers/db.php');
+require('../helpers/notify.php');
 //Check if the customer is already in db, if so make new db entry for server and update others to reflect instances
 
 date_default_timezone_set('UTC');
@@ -56,7 +57,7 @@ foreach($purchases as $purchase) {
 
             $robj = $select->fetchAll(PDO::FETCH_ASSOC);
 
-            if ($robj == null) { echo $noaccess." revoked"; exit; }
+            if ($robj == null) { echo $noaccess; exit; }
 
             foreach($robj as $row => $link) {
                 $revoke->bindParam(1, $purchase['purchase_revoked'], PDO::PARAM_INT);
@@ -140,6 +141,7 @@ if ($sobj == null) {
             $message .= '</body></html>';
 
             mail("panel@xxlmm13xxgaming.com", "A server was automatically banned!", $message, $headers);
+            Notifications::saveNotification('<div><a id="noti" class="dropdown-item">'.$serverp.' has been automatically banned'.'</a><a id="ip" class="hidden">'.$customer.'</a>');
             exit;
         } else {
             $conn->quote($customer);

@@ -38,15 +38,15 @@ if (isset($search)) {
         }
 
         if ($link['revoked'] == 1) {
-            $rbtn = "<button type=\"button\" class=\"btn btn-success btn-sm\" onclick=\"CallActions('ur');\">Unrevoke</button>";
+            $rbtn = "<button type=\"button\" class=\"btn btn-success btn-sm\" onclick=\"CallActions('ur', '".$link['customer']."');\">Unrevoke</button>";
         } else {
-            $rbtn = "<button type=\"button\" class=\"btn btn-danger btn-sm\" onclick=\"CallActions('r');\">Revoke</button>";
+            $rbtn = "<button type=\"button\" class=\"btn btn-danger btn-sm\" onclick=\"CallActions('r', '".$link['customer']."');\">Revoke</button>";
         }
 
         if ($link['banned'] == 1) {
-            $bbtn = "<button type=\"button\" class=\"btn btn-success btn-sm\" onclick=\"CallActions('ub');\">Unban</button>";
+            $bbtn = "<button type=\"button\" class=\"btn btn-success btn-sm\" onclick=\"CallActions('ub', '".$link['customer']."');\">Unban</button>";
         } else {
-            $bbtn = "<button type=\"button\" class=\"btn btn-warning btn-sm\" onclick=\"CallActions('b')\";>Ban</button>";
+            $bbtn = "<button type=\"button\" class=\"btn btn-warning btn-sm\" onclick=\"CallActions('b', '".$link['customer']."')\";>Ban</button>";
         }
 
         echo'<tr>';
