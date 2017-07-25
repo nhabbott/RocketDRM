@@ -141,7 +141,7 @@ if ($sobj == null) {
             $message .= '</body></html>';
 
             mail("panel@xxlmm13xxgaming.com", "A server was automatically banned!", $message, $headers);
-            Notifications::saveNotification('<div><a id="noti" class="dropdown-item">'.$serverp.' has been automatically banned'.'</a><a id="ip" class="hidden">'.$customer.'</a>');
+            Notifications::saveNotification('<div><a id="noti" class="dropdown-item">'.$serverp.' was banned'.'</a><a id="ip" class="hidden">'.$customer.'</a>');
             exit;
         } else {
             $conn->quote($customer);

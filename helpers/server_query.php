@@ -31,7 +31,7 @@ foreach ($res as $row => $link) {
     echo'   <td><a href="steam://connect/'.$link['ip'].'">'.$link['ip'].'</a></td>';
     echo'   <td id="customer"><a href="http://steamcommunity.com/profiles/'.$link['customer'].'">'.$link['customer'].'</a></td>';
     echo    $tlink;
-    echo'   <td>'.$link['last_ping'].'</td>';
+    echo'   <td>'.$link['last_ping'].' UTC'.'</td>';
     echo'   <td>'.$rbtn.'  '.$bbtn.'</td>';
     echo'</tr>';
 }

@@ -9,6 +9,7 @@ body {
   margin-bottom: 20px;
 }
 
+
 .table-inverse td, .table-inverse th, .table-inverse thead th {
   border-color: #333333;
 }
@@ -24,8 +25,23 @@ h2 {
   vertical-align: middle;
 }
 
+.dropdown {
+  list-style: none;
+  padding-right: 5px;
+}
+
+@keyframes bell-fade {
+  from {color: red;}
+  to {color: white;}
+
+}
+
 .red {
   color: red;
+  animation-name: bell-fade;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
 }
 
 .hidden {
