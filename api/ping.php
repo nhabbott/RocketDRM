@@ -143,6 +143,13 @@ if ($sobj == null) {
             mail("panel@xxlmm13xxgaming.com", "A server was automatically banned!", $message, $headers);
             Notifications::saveNotification('<div><a id="noti" class="dropdown-item">'.$serverp.' was banned'.'</a><a id="ip" class="hidden">'.$customer.'</a>');
             exit;
+        } elseif ($link['ip'] != $serverp && $link['banned']) {
+            $conn->quote($customer);
+            $update->bindParam(1, $ping, PDO::PARAM_STR);
+            $update->bindParam(2, $customer, PDO::PARAM_STR);
+            $update->execute();
+            echo $noaccess;
+            exit;
         } else {
             $conn->quote($customer);
             $update->bindParam(1, $ping, PDO::PARAM_STR);
