@@ -11,13 +11,13 @@ $customer = $_POST['sid'];
 $tid = "";
 $ping = date("Y-m-d H:i:s");
 
-$noaccess = "bad";
-$yesaccess = "good";
+$noaccess = "sQHJAz3az4WePevw";
+$yesaccess = "vZTFfrwGA7nfhGCL";
 
 $insert = $conn->prepare("INSERT INTO `servers` (`name`, `ip`, `customer`, `tid`, `last_ping`) VALUES (?, ?, ?, ?, ?)");
-$update = $conn->prepare("UPDATE `servers` SET `last_ping`=? WHERE `customer`=?");
+$update = $conn->prepare("UPDATE `servers` SET `last_ping`=? WHERE `ip`=?");
 $ban = $conn->prepare("INSERT INTO `servers` (`name`, `ip`, `customer`, `tid`, `last_ping`, `banned`) VALUES (?, ?, ?, ?, ?, ?)");
-$revoke = $conn->prepare("UPDATE `servers` SET `revoked`=? WHERE `customer`=?");
+$revoke = $conn->prepare("UPDATE `servers` SET `revoked`=? WHERE `ip`=?");
 
 //**************************
 // Get GmodStore Data (PTID)
@@ -80,6 +80,15 @@ if (!$haspurchased) {
 // Start looking at our DB
 //************************
 
+
+
+$select = $conn->prepare("SELECT * FROM `servers` WHERE `ip`=?");
+$conn->quote($serverp);
+$select->bindParam(1, $serverp, PDO::PARAM_STR);
+$select->execute();
+
+$sobjexists = $select->fetchAll(PDO::FETCH_ASSOC);
+
 $select = $conn->prepare("SELECT * FROM `servers` WHERE `customer`=?");
 $conn->quote($customer);
 $select->bindParam(1, $customer, PDO::PARAM_STR);
@@ -103,14 +112,21 @@ if ($sobj == null) {
     
 } else if ($sobj != null) {
     foreach($sobj as $row => $link) {
-        if ($link['ip'] == $serverp && !$link['banned']) {
+        if ($link['ip'] == $serverp && $link['banned']) {
             $conn->quote($customer);
             $update->bindParam(1, $ping, PDO::PARAM_STR);
-            $update->bindParam(2, $customer, PDO::PARAM_STR);
+            $update->bindParam(2, $serverp, PDO::PARAM_STR);
+            $update->execute();
+            echo $noaccess;
+            exit;
+        } elseif ($link['ip'] == $serverp && !$link['banned']) {
+            $conn->quote($customer);
+            $update->bindParam(1, $ping, PDO::PARAM_STR);
+            $update->bindParam(2, $serverp, PDO::PARAM_STR);
             $update->execute();
             echo $yesaccess;
             exit;
-        } elseif ($link['ip'] != $serverp && !$link['banned']) {
+        } elseif ($link['ip'] != $serverp && !$link['banned'] && $sobjexists == null) {
             $conn->quote($servern);
             $conn->quote($serverp);
             $conn->quote($customer);
@@ -143,17 +159,17 @@ if ($sobj == null) {
             mail("panel@xxlmm13xxgaming.com", "A server was automatically banned!", $message, $headers);
             Notifications::saveNotification('<div><a id="noti" class="dropdown-item">'.$serverp.' was banned'.'</a><a id="ip" class="hidden">'.$customer.'</a>');
             exit;
-        } elseif ($link['ip'] != $serverp && $link['banned']) {
+        } elseif ($link['ip'] != $serverp && !$link['banned'] && $sobjexists != null) {
             $conn->quote($customer);
             $update->bindParam(1, $ping, PDO::PARAM_STR);
-            $update->bindParam(2, $customer, PDO::PARAM_STR);
+            $update->bindParam(2, $serverp, PDO::PARAM_STR);
             $update->execute();
-            echo $noaccess;
-            exit;
+            echo $yesaccess;
+            exit;            
         } else {
             $conn->quote($customer);
             $update->bindParam(1, $ping, PDO::PARAM_STR);
-            $update->bindParam(2, $customer, PDO::PARAM_STR);
+            $update->bindParam(2, $serverp, PDO::PARAM_STR);
             $update->execute();
             echo $noaccess;
             exit;

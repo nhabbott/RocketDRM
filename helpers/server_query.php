@@ -20,9 +20,9 @@ foreach ($res as $row => $link) {
     }
 
     if ($link['banned'] == 1) {
-        $bbtn = "<button type=\"button\" class=\"btn btn-success btn-sm\" onclick=\"CallActions('ub', '".$link['customer']."');\">Unban</button>";
+        $bbtn = "<button type=\"button\" class=\"btn btn-success btn-sm\" onclick=\"CallActions('ub', '".$link['ip']."');\">Unban</button>";
     } else {
-        $bbtn = "<button type=\"button\" class=\"btn btn-warning btn-sm\" onclick=\"CallActions('b', '".$link['customer']."')\";>Ban</button>";
+        $bbtn = "<button type=\"button\" class=\"btn btn-warning btn-sm\" onclick=\"CallActions('b', '".$link['ip']."')\";>Ban</button>";
     }
 
     echo'<tr>';

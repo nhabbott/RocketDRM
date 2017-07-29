@@ -61,7 +61,7 @@ if ($action == "r" && isset($_GET['term']) && isset($_GET['customer'])) {
         exit;
     }
 } elseif ($action == "b" && isset($_GET['term']) && isset($_GET['customer'])) {
-    $sql = $conn->prepare("UPDATE `servers` SET `banned`=? WHERE `customer`=?");
+    $sql = $conn->prepare("UPDATE `servers` SET `banned`=? WHERE `ip`=?");
     $banned = 1;
     $sql->bindParam(1, $banned, PDO::PARAM_INT);
     $sql->bindParam(2, $customer, PDO::PARAM_STR);
@@ -69,7 +69,7 @@ if ($action == "r" && isset($_GET['term']) && isset($_GET['customer'])) {
     echo "worked";
     exit;
 } elseif ($action == "ub" && isset($_GET['term']) && isset($_GET['customer'])) {
-    $sql = $conn->prepare("UPDATE `servers` SET `banned`=? WHERE `customer`=?");
+    $sql = $conn->prepare("UPDATE `servers` SET `banned`=? WHERE `ip`=?");
     $banned = 0;
     $sql->bindParam(1, $banned, PDO::PARAM_INT);
     $sql->bindParam(2, $customer, PDO::PARAM_STR);
