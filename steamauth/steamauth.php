@@ -56,7 +56,7 @@ try {
                             exit;
 					    } else {
 						    $_SESSION['isadmin'] = false;
-                            header("Refresh:1; url=http://lmgtfy.com/?q=fuck+off");
+                            header("Refresh:1; url=http://lmgtfy.com/?q=try+again");
                             echo "Please wait";
                             ob_end_flush();
                             exit;
